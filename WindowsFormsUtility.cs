@@ -9,20 +9,20 @@ namespace CPUWindowsFormsFramework
 {
     public class WindowsFormsUtility
     {
-        public static void SetListBinding(ComboBox lst, DataTable dt, String tablename)
+        public static void SetListBinding(ComboBox lst, DataTable sourcedt, DataTable targetdt, String tablename)
         {
-            lst.DataSource = dt;
+            lst.DataSource = sourcedt;
             lst.ValueMember = tablename + "Id";
             lst.DisplayMember = lst.Name.Substring(3);
-            lst.DataBindings.Add("SelectedValue", dt, lst.ValueMember, false, DataSourceUpdateMode.OnPropertyChanged);
+            lst.DataBindings.Add("SelectedValue", targetdt, lst.ValueMember, false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         public static void SetControlBinding(Control ctrl, DataTable dt)
         {
             string propertyname = "";
-            string columnname = "";
             string controlname = ctrl.Name.ToLower();
-            string controltype = columnname.Substring(0, 3);
+            string columnname = controlname.Substring(3);
+            string controltype = controlname.Substring(0, 3);
             switch (controltype)
             {
                 case "txt":
@@ -38,6 +38,14 @@ namespace CPUWindowsFormsFramework
             {
                 ctrl.DataBindings.Add(propertyname, dt, columnname, true, DataSourceUpdateMode.OnPropertyChanged);
             }
+        }
+
+        public static void FormatGridForSearchResults(DataGridView grid)
+        {
+            grid.AllowUserToAddRows = false;
+            grid.ReadOnly = true;
+            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
     }
 }
