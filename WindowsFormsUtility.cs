@@ -63,7 +63,7 @@ namespace CPUWindowsFormsFramework
             foreach (DataGridViewColumn col in grid.Columns)
             {
                 col.HeaderText = System.Text.RegularExpressions.Regex.Replace(col.Name, "([A-Z])", " $1").Trim();
-                if (col.Name.EndsWith("Id"))
+                if (col.Name.EndsWith("Id") || col.Name.EndsWith("Pic"))
                 {
                     col.Visible = false;
                 }
@@ -107,6 +107,7 @@ namespace CPUWindowsFormsFramework
             c.DisplayMember = displaymember;
             c.ValueMember = tablename + "Id";
             c.DataPropertyName = c.ValueMember;
+            c.Name = tablename;
             c.HeaderText = tablename;
             grid.Columns.Insert(0, c);
 
