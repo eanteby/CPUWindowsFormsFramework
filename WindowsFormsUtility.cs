@@ -23,8 +23,10 @@ namespace CPUWindowsFormsFramework
             string controltype = controlname.Substring(0, 3);
             switch (controltype)
             {
+
                 case "txt":
                 case "lbl":
+                case "num":
                     propertyname = "Text";
                     break;
                 case "dtp":
